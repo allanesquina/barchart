@@ -30,20 +30,20 @@
         tDateEl = tDateEl || tooltip.select('#t-date');
         tAmountEl = tAmountEl || tooltip.select('#t-amount');
 
-        tooltip.attr("style", "transform: translate(" + (d3.event.layerX -
-            50) + "px, 0)")
+        tooltip.attr('style', 'transform: translate(' + (d3.event.layerX -
+            50) + 'px, 0)')
         tDateEl.text(date.toDateString().split(' ')[0] + ' ' + (date.getUTCMonth() +
             1) + '/' + date.getUTCDate());
-        tAmountEl.text((obj.value / 100).toLocaleString("en-US", {
-            style: "currency",
-            currency: "USD"
+        tAmountEl.text((obj.value / 100).toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD'
         }));
 
         tooltip.attr('class', 'show');
     }
 
     function hideTooltip() {
-        tooltip.attr("class", "");
+        tooltip.attr('class', '');
     }
 
     function getMonth(month, months) {
@@ -83,7 +83,7 @@
         }, []);
 
         days = d3.keys(data[0]).filter(function (key) {
-            return key !== "month"
+            return key !== 'month'
         });
 
         if (!('d_31' in days)) {
@@ -109,12 +109,12 @@
     var y = d3.scale.linear().range([height, 0]);
 
     // Creating a svg element
-    var svg = d3.select("body").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top +
-            ")");
+    var svg = d3.select('body').append('svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top +
+            ')');
 
 
     function render(data) {
@@ -130,34 +130,34 @@
         })]);
 
         // Creating month groups
-        var month = svg.selectAll(".month")
+        var month = svg.selectAll('.month')
             .data(data)
-            .enter().append("g")
-            .attr("class", "month")
-            .attr("transform", function (d) {
+            .enter().append('g')
+            .attr('class', 'month')
+            .attr('transform', function (d) {
                 marginRight = first ? 0 : marginRight + (day31 ? 42 :
                     50);
                 first = false;
                 day31 = ('d_31' in d);
-                return "translate(" + (x0(d.month) - marginRight) +
-                    ",0)";
+                return 'translate(' + (x0(d.month) - marginRight) +
+                    ',0)';
             })
 
         // Creating month's days
-        month.selectAll("rect")
+        month.selectAll('rect')
             .data(function (d) {
                 return d.days;
             })
-            .enter().append("rect")
-            .attr("width", x1.rangeBand())
-            .attr("class", "bar")
-            .attr("x", function (d) {
+            .enter().append('rect')
+            .attr('width', x1.rangeBand())
+            .attr('class', 'bar')
+            .attr('x', function (d) {
                 return x1(d.name);
             })
-            .attr("y", function (d) {
+            .attr('y', function (d) {
                 return y(d.value);
             })
-            .attr("height", function (d) {
+            .attr('height', function (d) {
                 return height - y(d.value);
             })
             .on('mouseover', function (d) {
@@ -169,15 +169,15 @@
 
         // Creating labels (xaxis)
         month.append('g')
-            .attr("width", x0.rangeBand())
-            .attr("height", 50)
-            .attr("id", 'label')
-            .attr("transform", "translate(5," + (height + 15) + ")")
+            .attr('width', x0.rangeBand())
+            .attr('height', 50)
+            .attr('id', 'label')
+            .attr('transform', 'translate(5,' + (height + 15) + ')')
             .append('rect')
-            .attr("width", x0.rangeBand())
-            .attr("height", 2)
-            .attr("class", "label-border")
-            .attr("transform", "translate(0,-15)")
+            .attr('width', x0.rangeBand())
+            .attr('height', 2)
+            .attr('class', 'label-border')
+            .attr('transform', 'translate(0,-15)')
 
         label = month.select('#label');
 
@@ -185,14 +185,14 @@
             .text(function (d) {
                 return monthNames[d.month - 1].toUpperCase();
             })
-            .attr("class", "label-text")
-            .attr("transform", "translate(15,3)")
+            .attr('class', 'label-text')
+            .attr('transform', 'translate(15,3)')
 
         label.append('rect')
-            .attr("width", 2)
-            .attr("class", "label-border")
-            .attr("height", 20)
-            .attr("transform", "translate(0,-12)")
+            .attr('width', 2)
+            .attr('class', 'label-border')
+            .attr('height', 20)
+            .attr('transform', 'translate(0,-12)')
     }
 
     // init
