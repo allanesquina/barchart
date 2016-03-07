@@ -24,7 +24,11 @@
     var days;
 
     function showTooltip(obj) {
-        var date = new Date(obj.date);
+        // console.log(obj);
+        var dateSplit = obj.date.split('-');
+        // Firefox fix
+        var dateString = dateSplit[2].length === 1 ? dateSplit[0] + '-' + dateSplit[1] + '-0' + dateSplit[2] : obj.date;
+        var date = new Date(dateString);
 
         tooltip = tooltip || d3.select('#tooltip');
         tDateEl = tDateEl || tooltip.select('#t-date');
@@ -32,7 +36,7 @@
 
         tooltip.attr('style', 'transform: translate(' + (d3.event.layerX -
             50) + 'px, 0)')
-        tDateEl.text(date.toDateString().split(' ')[0] + ' ' + (date.getUTCMonth() +
+        tDateEl.text(date.toString().split(' ')[0] + ' ' + (date.getUTCMonth() +
             1) + '/' + date.getUTCDate());
         tAmountEl.text((obj.value / 100).toLocaleString('en-US', {
             style: 'currency',
